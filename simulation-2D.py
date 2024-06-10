@@ -6,10 +6,10 @@ from tqdm import tqdm
 
 # Constants
 length = 1
-speed = 1
-resolution = 200
+speed = 0.1
+resolution = 100
 num_steps = 1000
-wave_width = 0.1
+wave_width = 0.05
 
 dx = length / resolution
 dt = np.sqrt(2)/2 * dx / speed
@@ -26,8 +26,8 @@ f[1:-1, 1:-1, 1] = f[1:-1, 1:-1, 0] + 0.5 * speed**2 * (dt/dx)**2 * \
      f[1:-1, 2:, 0] + f[1:-1, :-2, 0] - 2*f[1:-1, 1:-1, 0])
 
 fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
-surface = ax.plot_surface(X, Y, f[:, :, 0], cmap=cm.coolwarm)
-ax.set(xlim=[0, length], ylim=[0, length], zlim=[-0.25, 1])
+surface = ax.plot_surface(X, Y, f[:, :, 0])
+ax.set(xlim=[0, length], ylim=[0, length], zlim=[-1, 1])
 
 for i in tqdm(range(2, num_steps)):
     spacial_info = f[2:, 1:-1, i-1] + f[:-2, 1:-1, i-1] + f[1:-1, 2:, i-1] + f[1:-1, :-2, i-1] - 4*f[1:-1, 1:-1, i-1]
