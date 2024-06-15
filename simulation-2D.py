@@ -6,9 +6,9 @@ from tqdm import tqdm
 
 # Constants
 length = 1
-speed = 1
+speed = 0.1
 gamma = 1
-resolution = 200
+resolution = 100
 num_steps = 1000
 wave_width = 0.05
 
@@ -21,7 +21,7 @@ X, Y = np.meshgrid(x, y)
 f = np.zeros((len(x), len(x), num_steps))
 
 # Starting conditions
-f[:, :, 0] = np.exp(-((X - length/3)**2 + (Y - length/4)**2) / wave_width**2)
+f[:, :, 0] = np.exp(-((X - length/2)**2 + (Y - length/2)**2) / wave_width**2)
 f[1:-1, 1:-1, 1] = f[1:-1, 1:-1, 0] + 0.5 * speed**2 * (dt/dx)**2 * \
     (f[2:, 1:-1, 0] + f[:-2, 1:-1, 0] - 2*f[1:-1, 1:-1, 0] + 
      f[1:-1, 2:, 0] + f[1:-1, :-2, 0] - 2*f[1:-1, 1:-1, 0])
