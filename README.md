@@ -97,4 +97,30 @@ Hence we have solved the 1D wave equation with damping. Here's the same example 
 
 <p align="center"><img src="Images/Wave-1D-Sine-Damped.gif" alt="Discretization" width="400"/></p>
 
-One thing to note is that if $\gamma = 0$, the $\frac{1}{2}$ at the start of the equation will cancel with the terms in the inside, giving us the original solution to the 1D wave equation. This confirms that our we did our math correct and that we didn't just get a whole different equation. That would be bad, probably.
+One thing to note is that if $\gamma = 0$, the $\frac{1}{2}$ at the start of the equation will cancel with the terms in the inside, giving us the original solution to the 1D wave equation. This confirms that our we did our math correct.
+
+### Boundary Conditions
+
+If you were paying attention really closely, you might have noticed that the finite difference method doesn't tell us what to do at the boundaries. Let's take a look at the equations to see why.
+
+$$\psi'(x_i) = \frac{\psi(x_{i+1}) - \psi(x_{i-1})}{2 \Delta x}$$
+
+$$\psi''(x_i) = \frac{\psi(x_{i+1}) - 2\psi(x_i) + \psi(x_{i-1})}{\Delta x^2}$$
+
+As it turns out, both the first and second derivatives rely on the cells before and after the cell we want to update. But what if there's no cell before, like the case of the first cell, or no cell after, like the case of the last cell. Turns out that there are many solutions to this problem, each with their own use case. I will demonstrate four such boundary conditions that are often used to solve this issue.
+
+#### Dirichlet Boundary Condition
+
+This boundary condition, named after the German mathmatician Johann Peter Gustav Lejeune Dirichlet, is the one that I have been displaying in my examples so far. This boundary condition can be written explicitly as 
+
+$$\psi \Big|_{\partial M} = 0$$
+
+where $M$ is a manifold (the general term for surface) and $\partial M$ is the boundary of $M$. The Dirichlet Boundary Condition takes the far simplest approach, in my opinion, by just setting the boundaries to be zero so we can forget about them entirely.
+
+#### Neumann Boundary Condition
+
+This boundary condition is named after John von Neumann, a Hungarian-American mathematician and physicist, and is used when the rate of change of the wave function is known at the boundary. It can be written explicitly as 
+
+$$\frac{\partial \psi}{\partial t} \Big|_{\partial M} = f(t)$$
+
+where $f(t)$ is the rate of the change of the wave function at the boundary. The simplest form of this boundary condition is when $f(t) = 0$, which is what I have implemented.
