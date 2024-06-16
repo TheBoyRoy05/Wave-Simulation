@@ -45,7 +45,9 @@ Hence, we have solved the wave equation in one dimension using the finite-differ
 
 <p align="center"><img src="Images/Wave-1D-Sine.gif" alt="1D Sine Wave" width="400"/></p>
 
-One thing to note is that $C = c\displaystyle\frac{\Delta t}{\Delta x}$ term is call the Courant number and the Courant-Friedrichs-Lewy (CFL) condition requires that $C \le 1$ for numerical stability for this simulation.
+One thing to note is that $C = c\displaystyle\frac{\Delta t}{\Delta x}$ term is call the Courant number and the Courant-Friedrichs-Lewy (CFL) condition requires that $C \le 1$ for numerical stability for this simulation. Here's an example of what happens if we let $C = 1.5$. As you can see, not very good things.
+
+<p align="center"><img src="Images/Wave-1D-Sine-Unstable.gif" alt="1D Sine Wave" width="400"/></p>
 
 Now let's solve the two dimensional wave equation using the finite difference method and applying the same ideas that we used here.
 
@@ -77,7 +79,7 @@ Now, let's solve the wave equation with damping by modifying the wave equation t
 
 $$\frac{\partial^2 \psi}{\partial t^2} + \gamma \frac{\partial \psi}{\partial t} = c^2 \nabla^2 \psi$$
 
-where $\gamma$ is the damping coefficient. Let's start in one dimension. Using the notation from the last part and the tools given to us by the finite-difference method, we can write this equation as 
+where $\gamma$ is the damping coefficient. Using the notation from the last part and the tools given to us by the finite-difference method, we can write this equation in one dimension as 
 
 $$\frac{\psi_{i+1,j} - 2\psi_{i,j} + \psi_{i-1,j}}{\Delta t^2} + \gamma \frac{\psi_{i+1,j} - \psi_{i-1,j}}{2\Delta t} = c^2\frac{\psi_{i,j+1} - 2\psi_{i,j} + \psi_{i,j-1}}{\Delta x^2}$$
 
@@ -139,4 +141,64 @@ In two dimensions, we can't set the boundary cell to any one of it's neighbors s
 
 ### Absorbing Boundary Condition (ABC)
 
-ABCs are designed to simulate an open boundary where waves can exit the simulation domain without reflecting back. 
+ABCs are designed to simulate an open boundary where waves can exit the simulation domain without reflecting back. I guess the name should be pretty self explanatory. The equation for the ABC in one dimension is given by
+
+$$\frac{\partial \psi}{\partial t} + c \frac{\partial \psi}{\partial n} = 0$$
+
+Again, we can use the finite-difference method to solve this partial differential equation by slightly changing how we take the slope. Instead of taking the average of the slopes of the two lines around the boundary point, we'll just take the slope from the side that exists. Now let's apply this to the two boundaries in the 1D case
+
+For the left boundary, 
+$$\frac{\psi_{i+1, 0} - \psi_{i, 0}}{\Delta t} = c \frac{\psi_{i, 1} - \psi_{i, 0}}{\Delta x}$$
+$$\psi_{i+1, 0} = \psi_{i, 0} + c\frac{\Delta t}{\Delta x}(\psi_{i, 1} - \psi_{i, 0})$$
+For the right boundary, 
+$$\frac{\psi_{i+1, -1} - \psi_{i, -1}}{\Delta t} = -c \frac{\psi_{i, -1} - \psi_{i, -2}}{\Delta x}$$
+$$\psi_{i+1, -1} = \psi_{i, -1} - c\frac{\Delta t}{\Delta x}(\psi_{i, -1} - \psi_{i, -2})$$
+
+where the negative indeces on the right boundary use python syntax to indicate how far from the right the cell is. For example, the $-1$ index is the rightmost cell.
+
+There are two things to notice here. First, the signs flip for each boundary due to the fact that we need the oriented normal derivative of $\psi$. Second, I didn't use the usual finite-difference derivative for $\displaystyle \frac{\partial \psi}{\partial t}$ in order to avoid numerical instability. Instead, we take the change in $\psi$ from now to the next time step.
+
+Now, to see this boundary condition in action, let's first take a look at the 1D Gaussian with Neumann boundary conditions and $\gamma = 0$ as a reference along with the 1D Gaussian with Absorbing Boundary Conditions and $\gamma = 0$.
+
+<figure align="center"><img src="Images/Wave-1D-Gaussian-Neumann.gif" alt="Gaussian Nuemann" width="400"/><figcaption align="center">Neumann</figcaption></figure>
+
+<figure align="center"><img src="Images/Wave-1D-Gaussian-Absorbing.gif" alt="Gaussian Absorbing" width="400"/><figcaption align="center">ABC</figcaption></figure>
+
+Despite the fact that $\gamma = 0$, the Absorbing Boundary Condition absorbs most of the incoming wave and only reflects a relatively small amount. Exactly what you would expect from the name.
+
+### Periodic Boundary Condition
+
+This is the last boundary condition that I'll explore here. The idea behind it is to connect opposite boundaries together so we can avoid the issue of not have a cell before and after. If there's no cell before, just use the last cell. If there's no cell after, use the first cell. Problem solved. Because of it's periodic nature, this boundary condition is useful for simulating wave phenomena in a closed loop or cyclic domain.
+
+Thankfully, the math behind it is straightforward and it's as simple as 
+
+$$\psi(0) = \psi(L)$$
+
+The discretization is also simple. Just use the equations supplied by the finite difference method and use the last cell if there's no cell before and the first cell if there's no cell after.
+
+Now, let's simulate an off-center Gaussian with $\gamma = 0$ and Neumann boundary conditions for reference along with another simulation with the same setup but with Periodic boundary conditions.
+
+<figure align="center"><img src="Images\Wave-1D-Gauss-OffCenter-Neumann.gif" alt="Gaussian Nuemann" width="400"/><figcaption align="center">Neumann</figcaption></figure>
+
+<figure align="center"><img src="Images\Wave-1D-Gauss-OffCenter-Periodic.gif" alt="Gaussian Periodic" width="400"/><figcaption align="center">Periodic</figcaption></figure>
+
+As you can see, the wave loops back around and form a sort of periodicity in the simulation just as you would expect from the name. This is probably the next simplest boundary condition after Dirichlet. Of course, there are also other variations of this that impose slightly difference conditions to get different behaviors.
+
+### Mixing Boundary Conditions
+
+When applying boundary conditions, we aren't only confined to using one boundary condition. In fact, we could use a different condition on each boundary if we want. Here's an example of that using the 2D Gaussian.
+
+
+
+## Conclusion
+
+Firstly, if you've made it to the end of this README, Thank You. This was just a small passion project that I found myself diving head-first into very quickly. It started when I was watching some Youtube videos on the wave equation when I thought, "I could probably make a simulation for that." And so I did my research and learned a lot of new things, diving into rabbit hole after rabbit hole while making this project. From Differential Equations to Quantum Mechanics, there's so much to explore with this topic. But most importantly, I find it amazing that we have techniques and the capability to create something as mesmerizing as a ripple in a pond.
+
+This project only scratches the tip of the iceberg and there are many paths to go from here. Implementing different boundary conditions, adding obstacles, optimizing calculations, making the simulations interactive. These are just a few ideas on where to go from here. Thanks for reading.
+
+## Works Cited
+[Brian Sullivan - The Wave Equation & the Leapfrog Algorithm](https://www.youtube.com/watch?v=B4rziSNUpAA&list=PLN0b-Zk854ab6BHUQmI56WC1OLKPmwkY0)  
+[Nils Berglund - How to Simulate the Wave Equation](https://www.youtube.com/watch?v=pN-gi_omIVE&t=1631s)  
+[Numerical Methods for Engineers](https://folk.ntnu.no/leifh/teaching/tkt4140/._main056.html#kap:722)  
+[Reflecting Boundaries](https://hplgit.github.io/num-methods-for-PDEs/doc/pub/wave/html/._wave003.html)  
+[ChatGPT](https://chatgpt.com/)
