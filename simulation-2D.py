@@ -26,15 +26,16 @@ f[1:-1, 1:-1, 1] = f[1:-1, 1:-1, 0] + 0.5 * speed**2 * (dt/dx)**2 * \
     (f[2:, 1:-1, 0] + f[:-2, 1:-1, 0] - 2*f[1:-1, 1:-1, 0] + 
      f[1:-1, 2:, 0] + f[1:-1, :-2, 0] - 2*f[1:-1, 1:-1, 0])
 
-fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
-surface = ax.plot_surface(X, Y, f[:, :, 0])
-ax.set(xlim=[0, length], ylim=[0, length], zlim=[-1, 1])
-
 for i in tqdm(range(2, num_steps)):
     lagrangian = f[2:, 1:-1, i-1] + f[:-2, 1:-1, i-1] + f[1:-1, 2:, i-1] + \
         f[1:-1, :-2, i-1] - 4*f[1:-1, 1:-1, i-1]
     f[1:-1, 1:-1, i] = (4*f[1:-1, 1:-1, i-1] - f[1:-1, 1:-1, i-2] * (2 - gamma*dt) + \
         2 * speed**2 * (dt/dx)**2 * lagrangian) / (2 + gamma*dt)
+
+# Plotting + Animation
+fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
+surface = ax.plot_surface(X, Y, f[:, :, 0])
+ax.set(xlim=[0, length], ylim=[0, length], zlim=[-1, 1])
 
 def update(frame):
     global surface

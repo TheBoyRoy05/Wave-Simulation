@@ -85,15 +85,15 @@ $$\frac{\psi_{i+1,j} - 2\psi_{i,j} + \psi_{i-1,j}}{\Delta t^2} + \gamma \frac{\p
 
 We can start simplifying this by combining the left side into one fraction. This gives us 
 
-$$\frac{2\psi_{i+1,j} - 4\psi_{i,j} + 2\psi_{i-1,j} + \gamma\psi_{i+1,j} - \gamma\psi_{i-1,j}}{2\Delta t^2} = c^2\frac{\psi_{i,j+1} - 2\psi_{i,j} + \psi_{i,j-1}}{\Delta x^2}$$
+$$\frac{2\psi_{i+1,j} - 4\psi_{i,j} + 2\psi_{i-1,j} + \gamma \Delta t \psi_{i+1,j} - \gamma \Delta t \psi_{i-1,j}}{2\Delta t^2} = c^2\frac{\psi_{i,j+1} - 2\psi_{i,j} + \psi_{i,j-1}}{\Delta x^2}$$
 
 Now, if we combine like terms on the left side, we get 
 
-$$\frac{(2 + \gamma)\psi_{i+1,j} - 4\psi_{i,j} + (2 - \gamma)\psi_{i-1,j}}{2\Delta t^2} = c^2\frac{\psi_{i,j+1} - 2\psi_{i,j} + \psi_{i,j-1}}{\Delta x^2}$$
+$$\frac{(2 + \gamma \Delta t)\psi_{i+1,j} - 4\psi_{i,j} + (2 - \gamma \Delta t)\psi_{i-1,j}}{2\Delta t^2} = c^2\frac{\psi_{i,j+1} - 2\psi_{i,j} + \psi_{i,j-1}}{\Delta x^2}$$
 
 Our goal is still to solve for $\psi_{i+1,j}$ since we want to know what the next state of a cell is given it's previous state and the states of the cells nearby. To do this, we can simply rearrange our equation to get
 
-$$\psi_{i+1,j} = \frac{1}{2 + \gamma} \left( 4\psi_{i,j} - (2 - \gamma)\psi_{i-1,j} + 2c^2\frac{\Delta t^2}{\Delta x^2}(\psi_{i,j+1} - 2\psi_{i,j} + \psi_{i,j-1}) \right)$$
+$$\psi_{i+1,j} = \frac{1}{2 + \gamma \Delta t} \left( 4\psi_{i,j} - (2 - \gamma \Delta t)\psi_{i-1,j} + 2c^2\frac{\Delta t^2}{\Delta x^2}(\psi_{i,j+1} - 2\psi_{i,j} + \psi_{i,j-1}) \right)$$
 
 Hence we have solved the 1D wave equation with damping. Here's the same example as before, but with $\gamma = 1$. Notice how the wave gets dampened over time. This is exactly the result we hoped for.
 
@@ -197,8 +197,12 @@ Firstly, if you've made it to the end of this README, Thank You. This was just a
 This project only scratches the tip of the iceberg and there are many paths to go from here. Implementing different boundary conditions, adding obstacles, optimizing calculations, making the simulations interactive. These are just a few ideas on where to go from here. Thanks for reading.
 
 ## Works Cited
-[Brian Sullivan - The Wave Equation & the Leapfrog Algorithm](https://www.youtube.com/watch?v=B4rziSNUpAA&list=PLN0b-Zk854ab6BHUQmI56WC1OLKPmwkY0)  
-[Nils Berglund - How to Simulate the Wave Equation](https://www.youtube.com/watch?v=pN-gi_omIVE&t=1631s)  
-[Numerical Methods for Engineers](https://folk.ntnu.no/leifh/teaching/tkt4140/._main056.html#kap:722)  
-[Reflecting Boundaries](https://hplgit.github.io/num-methods-for-PDEs/doc/pub/wave/html/._wave003.html)  
+[Brian Sullivan - The Wave Equation & the Leapfrog Algorithm](https://www.youtube.com/watch?v=B4rziSNUpAA&list=PLN0b-Zk854ab6BHUQmI56WC1OLKPmwkY0)
+
+[Nils Berglund - How to Simulate the Wave Equation](https://www.youtube.com/watch?v=pN-gi_omIVE&t=1631s)
+
+[Numerical Methods for Engineers](https://folk.ntnu.no/leifh/teaching/tkt4140/._main056.html#kap:722)
+
+[Reflecting Boundaries](https://hplgit.github.io/num-methods-for-PDEs/doc/pub/wave/html/._wave003.html)
+
 [ChatGPT](https://chatgpt.com/)
