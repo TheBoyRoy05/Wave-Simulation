@@ -17,15 +17,15 @@ In applied mathematics, discretization is the process of transferring continuous
 
 <p align="center"><img src="Images/Discretization.jpg" alt="Discretization" width="400"/></p>
 
-If we want to find $\displaystyle\frac{d \psi}{dx} \Big|_{\displaystyle x_i}$ we can calculate the average slope of the two lines next to $x_i$. Doing this, we find that 
+If we want to find $\displaystyle\frac{d \psi}{dx} \Big|_{\displaystyle x_i} = \psi'(x_i)$, we can calculate the average slope of the two lines next to $x_i$. Doing this, we find that 
 
-$$\frac{d \psi}{dx} \Big|_{\displaystyle x_i} = \frac{1}{2}\left( \frac{\psi(x_{i+1}) - \psi(x_i)}{\Delta x} + \frac{\psi(x_i) - \psi(x_{i-1})}{\Delta x} \right)$$
+$$\psi'(x_i) = \frac{1}{2}\left( \frac{\psi(x_{i+1}) - \psi(x_i)}{\Delta x} + \frac{\psi(x_i) - \psi(x_{i-1})}{\Delta x} \right)$$
 
 $$ = \frac{\psi(x_{i+1}) - \psi(x_{i-1})}{2 \Delta x}$$
 
-Now, if we want to find $\displaystyle\frac{d^2 \psi}{dx^2} \Big|_{\displaystyle x_i}$ we can calculate the change in slope on the two lines next to $x_i$. Doing this, we find that
+Now, if we want to find $\displaystyle\frac{d^2 \psi}{dx^2} \Big|_{\displaystyle x_i} = \psi''(x_i)$, we can calculate the change in slope on the two lines next to $x_i$. Doing this, we find that
 
-$$\frac{d^2 \psi}{dx^2} \Big|_{\displaystyle x_i} = \frac{1}{\Delta x}\left( \frac{\psi(x_{i+1}) - \psi(x_i)}{\Delta x} - \frac{\psi(x_i) - \psi(x_{i-1})}{\Delta x} \right)$$
+$$\psi''(x_i) = \frac{1}{\Delta x}\left( \frac{\psi(x_{i+1}) - \psi(x_i)}{\Delta x} - \frac{\psi(x_i) - \psi(x_{i-1})}{\Delta x} \right)$$
 
 $$ = \frac{\psi(x_{i+1}) - 2\psi(x_i) + \psi(x_{i-1})}{\Delta x^2}$$
 
