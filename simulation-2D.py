@@ -7,8 +7,8 @@ from tqdm import tqdm
 # Constants
 length = 1
 speed = 0.1
-gamma = 1
-resolution = 100
+gamma = 0
+resolution = 200
 num_steps = 1000
 wave_width = 0.05
 
@@ -43,5 +43,5 @@ def update(frame):
     ax.set_title(f"time: {frame*dt:.2f}")
 
 anim = FuncAnimation(fig=fig, func=update, frames=num_steps, interval=dt)
-anim.save("Wave.gif", writer=PillowWriter(fps=30))
+anim.save("Images/Wave-2D.gif", writer=PillowWriter(fps=30))
 plt.show()
