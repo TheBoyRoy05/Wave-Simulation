@@ -75,5 +75,5 @@ def update(frame):
     ax.set_title(f"time: {frame*dt:.2f}")
 
 anim = FuncAnimation(fig=fig, func=update, frames=num_steps, interval=dt)
-anim.save("Images/Wave-2D.gif", writer=PillowWriter(fps=30))
+# anim.save("Images/Wave-2D.gif", writer=PillowWriter(fps=30))
 plt.show()

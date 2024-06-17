@@ -132,7 +132,7 @@ $$\frac{\partial \psi}{\partial n} \Big|_{\partial M} = g(t)$$
 
 where $\displaystyle\frac{\partial}{\partial n}$ is the outward pointing normal from a general boundary. In one dimension we have
 
-$$\frac{\partial}{\partial n} \Big|_{x=L} = \frac{\partial}{\partial x},\ \ \ \ \frac{\partial}{\partial n} \Big|_{x=0} = -\frac{\partial}{\partial x}$$
+$$\frac{\partial}{\partial n} \psi(L) = \frac{\partial}{\partial x} \psi(L),\ \ \frac{\partial}{\partial n} \psi(0) = -\frac{\partial}{\partial x} \psi(0)$$
 
 Furthermore, $g(t)$ is the rate of the change of the wave function at the boundary. The simplest form of this boundary condition is when $g(t) = 0$, which is what I have implemented. In this case, there's no inward or outward flow and so the boundary cells will tend towards their neighboring cells.
 
