@@ -123,13 +123,13 @@ where $M$ is a manifold (the general term for surface) and $\partial M$ is the b
 
 This boundary condition, named after John von Neumann, a Hungarian-American mathematician and physicist, was the most difficult to wrap my head around since it can be considerabley generalized. This condition is used when the rate of change of the wave function is known at the boundary. The most general form of this condition is 
 
-$$\frac{\partial \psi}{\partial n} \Big|_{\partial M} = f(t)$$
+$$\frac{\partial \psi}{\partial n} \Big|_{\partial M} = g(t)$$
 
 where $\displaystyle\frac{\partial}{\partial n}$ is the outward pointing normal from a general boundary. In one dimension we have
 
 $$\frac{\partial}{\partial n} \Big|_{x=L} = \frac{\partial}{\partial x},\ \ \ \ \frac{\partial}{\partial n} \Big|_{x=0} = -\frac{\partial}{\partial x}$$
 
-Furthermore, $f(t)$ is the rate of the change of the wave function at the boundary. The simplest form of this boundary condition is when $f(t) = 0$, which is what I have implemented. In this case, there's no inward or outward flow and so the boundary cells will tend towards their neighboring cells.
+Furthermore, $g(t)$ is the rate of the change of the wave function at the boundary. The simplest form of this boundary condition is when $g(t) = 0$, which is what I have implemented. In this case, there's no inward or outward flow and so the boundary cells will tend towards their neighboring cells.
 
 In one dimension, this can be achieved by just setting the boundary cells to be equal to it's neighboring cell (Figure 1), or you could have update the boundary cell to move towards its neighbor by cutting the distance between them in half with each time step (Figure 2). The both achieve similar results as seen below, but the second method produces small waves on the left boundary which may not be desirable.
 
@@ -186,9 +186,11 @@ As you can see, the wave loops back around and form a sort of periodicity in the
 
 ### Mixing Boundary Conditions
 
-When applying boundary conditions, we aren't only confined to using one boundary condition. In fact, we could use a different condition on each boundary if we want. Here's an example of that using the 2D Gaussian.
+When applying boundary conditions, we aren't only confined to using one boundary condition. In fact, we could use a different condition on each boundary if we want. Here's an example of that using an off-center 2D Gaussian as the starting condition.
 
+<p align="center"><img src="Images/Wave-2D-Gaussian-Mixed.gif" alt="Mixed 2D Gaussian" width="400"/></p>
 
+In this simulation, $\gamma = 0$ and the boundary conditions are: Dirichlet on top, Neumann on the left, Absorbing on the right, and Periodic on the bottom boundary. As you can see, by combining all of these boundary conditions, we can get some complex behavior to arise and it looks pretty damn cool.
 
 ## Conclusion
 
