@@ -16,6 +16,7 @@ In this project, I will use the finite-difference method to solve the wave equat
 In applied mathematics, discretization is the process of transferring continuous functions, models, variables, and equations into discrete counterparts. To discretize our partial derivatives, let's first consider how we would descritze $\psi$ with respect to one variable. To do this, we first need to split $\psi$ into finite pieces of width $\Delta x$. When we do this, we'll get something like:
 
 <p align="center"><img src="Images/Discretization.jpg" alt="Discretization" width="400"/></p>
+<p align="center">Discretization</p>
 
 If we want to find $\displaystyle\frac{d \psi}{dx} \Big|_{\displaystyle x_i} = \psi'(x_i)$, we can calculate the average slope of the two lines next to $x_i$. Doing this, we find that 
 
@@ -44,10 +45,12 @@ $$\psi(t_{i+1}, x_j) = 2\psi(t_i, x_j) - \psi(t_{i-1}, x_j) + c^2\frac{\Delta t^
 Hence, we have solved the wave equation in one dimension using the finite-difference method. Here's one such solution for the 1D wave function with a starting condition of a superposition of sine waves.
 
 <p align="center"><img src="Images/Wave-1D-Sine.gif" alt="1D Sine Wave" width="400"/></p>
+<p align="center">1D Sine Wave</p>
 
 One thing to note is that $C = c\displaystyle\frac{\Delta t}{\Delta x}$ term is call the Courant number and the Courant-Friedrichs-Lewy (CFL) condition requires that $C \le 1$ for numerical stability for this simulation. Here's an example of what happens if we let $C = 1.5$. As you can see, not very good things.
 
 <p align="center"><img src="Images/Wave-1D-Sine-Unstable.gif" alt="1D Sine Wave" width="400"/></p>
+<p align="center">Numerical Instability (Bad)</p>
 
 Now let's solve the two dimensional wave equation using the finite difference method and applying the same ideas that we used here.
 
@@ -72,6 +75,7 @@ $$\psi_{i+1,j,k} = 2\psi_{i,j,k} - \psi_{i-1,j,k} + c^2\frac{\Delta t^2}{\Delta 
 Hence, we have solved the wave equation in two dimensions using the finite-difference method. Here's one such solution for the 2D wave function with a starting condition of a 2D Gaussian.
 
 <p align="center"><img src="Images/Wave-2D-Gaussian.gif" alt="2D Gaussian" width="400"/></p>
+<p align="center">2D Gaussian</p>
 
 ## Damping
 
@@ -98,6 +102,7 @@ $$\psi_{i+1,j} = \frac{1}{2 + \gamma \Delta t} \left( 4\psi_{i,j} - (2 - \gamma 
 Hence we have solved the 1D wave equation with damping. Here's the same example as before, but with $\gamma = 1$. Notice how the wave gets dampened over time. This is exactly the result we hoped for.
 
 <p align="center"><img src="Images/Wave-1D-Sine-Damped.gif" alt="Damped Sine Wave" width="400"/></p>
+<p align="center">Damped Sine Wave</p>
 
 One thing to note is that if $\gamma = 0$, the $\frac{1}{2}$ at the start of the equation will cancel with the terms in the inside, giving us the original solution to the 1D wave equation. This confirms that our we did our math correctly.
 
@@ -131,13 +136,13 @@ $$\frac{\partial}{\partial n} \Big|_{x=L} = \frac{\partial}{\partial x},\ \ \ \ 
 
 Furthermore, $g(t)$ is the rate of the change of the wave function at the boundary. The simplest form of this boundary condition is when $g(t) = 0$, which is what I have implemented. In this case, there's no inward or outward flow and so the boundary cells will tend towards their neighboring cells.
 
-In one dimension, this can be achieved by just setting the boundary cells to be equal to it's neighboring cell (Figure 1), or you could have update the boundary cell to move towards its neighbor by cutting the distance between them in half with each time step (Figure 2). The both achieve similar results as seen below, but the second method produces small waves on the left boundary which may not be desirable.
+In one dimension, this can be achieved by just setting the boundary cells to be equal to it's neighboring cell (Method 1), or you could have update the boundary cell to move towards its neighbor by cutting the distance between them in half with each time step (Method 2). The both achieve similar results as seen below, but the second method produces small waves on the left boundary which may not be desirable.
 
 <p align="center"><img src="Images/Wave-1D-Sine-Neumann1.gif" alt="Nuemann Method 1" width="400"/></p>
-<p align="center">Figure 1</p>
+<p align="center">Method 1</p>
 
 <p align="center"><img src="Images/Wave-1D-Sine-Neumann2.gif" alt="Nuemann Method 2" width="400"/></p>
-<p align="center">Figure 2</p>
+<p align="center">Method 2</p>
 
 In two dimensions, we can't set the boundary cell to any one of it's neighbors since it it has multiple, so we have to use the second method of having it tend towards some average of the neighbors. [This article](https://folk.ntnu.no/leifh/teaching/tkt4140/._main056.html#kap:722) discusses one such way to do this using ghost cells around the boundary. However, it should be noted that they are applying it to the heat equation rather than the wave equation which is similar, but first order in time. Regardless, the Neumann boundary condition can be applied the same way. 
 
@@ -195,6 +200,7 @@ As you can see, the wave loops back around and form a sort of periodicity in the
 When applying boundary conditions, we aren't only confined to using one boundary condition. In fact, we could use a different condition on each boundary if we want. Here's an example of that using an off-center 2D Gaussian as the starting condition.
 
 <p align="center"><img src="Images/Wave-2D-Gaussian-Mixed.gif" alt="Mixed 2D Gaussian" width="400"/></p>
+<p align="center">Mixed Boundary Conditions</p>
 
 In this simulation, $\gamma = 0$ and the boundary conditions are: Dirichlet on top, Neumann on the left, Absorbing on the right, and Periodic on the bottom boundary. As you can see, by combining all of these boundary conditions, we can get some complex behavior to arise and it looks pretty damn cool.
 
