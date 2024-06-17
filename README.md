@@ -133,9 +133,11 @@ Furthermore, $g(t)$ is the rate of the change of the wave function at the bounda
 
 In one dimension, this can be achieved by just setting the boundary cells to be equal to it's neighboring cell (Figure 1), or you could have update the boundary cell to move towards its neighbor by cutting the distance between them in half with each time step (Figure 2). The both achieve similar results as seen below, but the second method produces small waves on the left boundary which may not be desirable.
 
-<figure align="center"><img src="Images/Wave-1D-Sine-Neumann1.gif" alt="Nuemann Method 1" width="400"/><figcaption align="center">Figure 1</figcaption></figure>
+<p align="center"><img src="Images/Wave-1D-Sine-Neumann1.gif" alt="Nuemann Method 1" width="400"/></p>
+<p align="center">Figure 1</p>
 
-<figure align="center"><img src="Images/Wave-1D-Sine-Neumann2.gif" alt="Nuemann Method 1" width="400"/><figcaption align="center">Figure 2</figcaption></figure>
+<p align="center"><img src="Images/Wave-1D-Sine-Neumann2.gif" alt="Nuemann Method 2" width="400"/></p>
+<p align="center">Figure 2</p>
 
 In two dimensions, we can't set the boundary cell to any one of it's neighbors since it it has multiple, so we have to use the second method of having it tend towards some average of the neighbors. [This article](https://folk.ntnu.no/leifh/teaching/tkt4140/._main056.html#kap:722) discusses one such way to do this using ghost cells around the boundary. However, it should be noted that they are applying it to the heat equation rather than the wave equation which is similar, but first order in time. Regardless, the Neumann boundary condition can be applied the same way. 
 
@@ -160,9 +162,11 @@ There are two things to notice here. First, the signs flip for each boundary due
 
 Now, to see this boundary condition in action, let's first take a look at the 1D Gaussian with Neumann boundary conditions and $\gamma = 0$ as a reference along with the 1D Gaussian with Absorbing Boundary Conditions and $\gamma = 0$.
 
-<figure align="center"><img src="Images/Wave-1D-Gaussian-Neumann.gif" alt="Gaussian Nuemann" width="400"/><figcaption align="center">Neumann</figcaption></figure>
+<p align="center"><img src="Images/Wave-1D-Gaussian-Neumann.gif" alt="Gaussian Nuemann" width="400"/></p>
+<p align="center">Neumann</p>
 
-<figure align="center"><img src="Images/Wave-1D-Gaussian-Absorbing.gif" alt="Gaussian Absorbing" width="400"/><figcaption align="center">ABC</figcaption></figure>
+<p align="center"><img src="Images/Wave-1D-Gaussian-Absorbing.gif" alt="Gaussian Absorbing" width="400"/></p>
+<p align="center">ABC</p>
 
 Despite the fact that $\gamma = 0$, the Absorbing Boundary Condition absorbs most of the incoming wave and only reflects a relatively small amount. Exactly what you would expect from the name.
 
@@ -178,9 +182,11 @@ The discretization is also simple. Just use the equations supplied by the finite
 
 Now, let's simulate an off-center Gaussian with $\gamma = 0$ and Neumann boundary conditions for reference along with another simulation with the same setup but with Periodic boundary conditions.
 
-<figure align="center"><img src="Images\Wave-1D-Gauss-OffCenter-Neumann.gif" alt="Gaussian Nuemann" width="400"/><figcaption align="center">Neumann</figcaption></figure>
+<p align="center"><img src="Images\Wave-1D-Gauss-OffCenter-Neumann.gif" alt="Gaussian Nuemann" width="400"/></p>
+<p align="center">Neumann</p>
 
-<figure align="center"><img src="Images\Wave-1D-Gauss-OffCenter-Periodic.gif" alt="Gaussian Periodic" width="400"/><figcaption align="center">Periodic</figcaption></figure>
+<p align="center"><img src="Images\Wave-1D-Gauss-OffCenter-Periodic.gif" alt="Gaussian Periodic" width="400"/></p>
+<p align="center">Periodic</p>
 
 As you can see, the wave loops back around and form a sort of periodicity in the simulation just as you would expect from the name. This is probably the next simplest boundary condition after Dirichlet. Of course, there are also other variations of this that impose slightly difference conditions to get different behaviors.
 
