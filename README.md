@@ -152,7 +152,7 @@ ABCs are designed to simulate an open boundary where waves can exit the simulati
 
 $$\frac{\partial \psi}{\partial t} + c \frac{\partial \psi}{\partial n} = 0$$
 
-Again, we can use the finite-difference method to solve this partial differential equation by slightly changing how we take the slope. Instead of taking the average of the slopes of the two lines around the boundary point, we'll just take the slope from the side that exists. Now let's apply this to the two boundaries in the 1D case
+Again, we can use the finite-difference method to solve this partial differential equation by slightly changing how we take the slope. Instead of taking the average of the slopes of the two lines around the boundary point, we'll just take the slope from the side that exists. For example, if you're on the left boundary, take the slope on the right side. Now let's apply this to the two boundaries in the 1D case
 
 For the left boundary, 
 $$\frac{\psi_{i+1, 0} - \psi_{i, 0}}{\Delta t} = c \frac{\psi_{i, 1} - \psi_{i, 0}}{\Delta x}$$
@@ -181,7 +181,7 @@ This is the last boundary condition that I'll explore here. The idea behind it i
 
 Thankfully, the math behind it is straightforward and it's as simple as 
 
-$$\psi(0) = \psi(L)$$
+$$\psi(0) = \psi(L), \ \ \frac{\partial}{\partial x} \psi(0) = \frac{\partial}{\partial x} \psi(L)$$
 
 The discretization is also simple. Just use the equations supplied by the finite difference method and use the last cell if there's no cell before and the first cell if there's no cell after.
 
