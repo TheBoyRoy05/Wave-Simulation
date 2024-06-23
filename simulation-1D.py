@@ -9,7 +9,7 @@ speed = 1
 gamma = 0.5
 resolution = 100
 num_steps = 1000
-wave_width = 0.1
+playback_speed = 1.2
 CFL = 1
 
 dx = length / resolution
@@ -19,8 +19,8 @@ x = np.arange(0, length + dx, dx)
 f = np.zeros((num_steps, len(x)))
 
 # Starting conditions
-f[0, :] = -0.5*np.sin(2 * np.pi * x) - 0.3*np.sin(3 * np.pi * x)
-# f[0, :] = np.exp(-(x - length/3)**2 / wave_width**2)
+# f[0, :] = -0.5*np.sin(2 * np.pi * x) - 0.3*np.sin(3 * np.pi * x)
+f[0, :] = np.exp(-(x - length/3)**2 / 0.1**2)
 f[1, 1:-1] = f[0, 1:-1] + 0.5 * speed**2 * (f[0, 2:] + f[0, :-2] - 2*f[0, 1:-1]) * (dt/dx)**2
 
 # Boundary conditions (Dirichlet, Neumann, Absorbing, Periodic)
@@ -50,10 +50,10 @@ ax.set(xlim=[0, length], ylim=[-1.2, 1.2])
 line, = ax.plot(x, f[0, :])
 
 def update(frame):
-    line.set_data(x, f[frame, :])
+    line.set_data(x, f[int(frame*playback_speed), :])
     ax.set_title(f"time: {frame*dt:.2f}")
     return line,
 
-anim = FuncAnimation(fig=fig, func=update, frames=num_steps, interval=dt)
+anim = FuncAnimation(fig=fig, func=update, frames=int(num_steps//playback_speed), interval=dt*playback_speed)
 # anim.save("Images/Wave-1D.gif", writer=PillowWriter(fps=30))
 plt.show()

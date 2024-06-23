@@ -8,12 +8,13 @@ from tqdm import tqdm
 length = 1
 speed = 0.1
 gamma = 0
-resolution = 200
+resolution = 100
 num_steps = 1000
-wave_width = 0.05
+playback_speed = 2
+CFL = np.sqrt(2)/2
 
 dx = length / resolution
-dt = np.sqrt(2)/2 * dx / speed
+dt = CFL * dx / speed
 
 x = np.arange(0, length + dx, dx)
 y = np.arange(0, length + dx, dx)
@@ -21,7 +22,7 @@ X, Y = np.meshgrid(x, y)
 f = np.zeros((num_steps, len(x), len(x)))
 
 # Starting conditions
-f[0, :, :] = np.exp(-((X - length/2)**2 + (Y - length/3)**2) / wave_width**2)
+f[0, :, :] = np.exp(-((X - length/2)**2 + (Y - length/3)**2) / 0.05**2)
 f[1, 1:-1, 1:-1] = f[0, 1:-1, 1:-1] + 0.5 * speed**2 * (dt/dx)**2 * \
     (f[0, 2:, 1:-1] + f[0, :-2, 1:-1] - 2*f[0, 1:-1, 1:-1] + 
      f[0, 1:-1, 2:] + f[0, 1:-1, :-2] - 2*f[0, 1:-1, 1:-1])
@@ -71,9 +72,9 @@ ax.set(xlim=[0, length], ylim=[0, length], zlim=[-0.5, 0.5])
 def update(frame):
     global surface
     surface.remove()
-    surface = ax.plot_surface(X, Y, f[frame, :, :], cmap=cm.coolwarm)
+    surface = ax.plot_surface(X, Y, f[int(frame*playback_speed), :, :], cmap=cm.coolwarm)
     ax.set_title(f"time: {frame*dt:.2f}")
 
-anim = FuncAnimation(fig=fig, func=update, frames=num_steps, interval=dt)
+anim = FuncAnimation(fig=fig, func=update, frames=int(num_steps//playback_speed), interval=dt*playback_speed)
 # anim.save("Images/Wave-2D.gif", writer=PillowWriter(fps=30))
 plt.show()
