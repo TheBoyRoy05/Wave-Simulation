@@ -211,12 +211,12 @@ Firstly, if you've made it to the end of this README, Thank You. This was just a
 This project only scratches the tip of the iceberg and there are many paths to go from here. Implementing different boundary conditions, adding obstacles, optimizing calculations, making the simulations interactive. These are just a few ideas on where to go from here. Thanks for reading.
 
 ## Works Cited
-<p style="text-align:center;">[Brian Sullivan - The Wave Equation & the Leapfrog Algorithm](https://www.youtube.com/watch?v=B4rziSNUpAA&list=PLN0b-Zk854ab6BHUQmI56WC1OLKPmwkY0)</p>
+<p align=center><a href="https://www.youtube.com/watch?v=B4rziSNUpAA&list=PLN0b-Zk854ab6BHUQmI56WC1OLKPmwkY0">Brian Sullivan - The Wave Equation & the Leapfrog Algorithm</a></p>
 
-<p style="text-align:center;">[Nils Berglund - How to Simulate the Wave Equation](https://www.youtube.com/watch?v=pN-gi_omIVE&t=1631s)</p>
+<p align=center><a href="https://www.youtube.com/watch?v=pN-gi_omIVE&t=1631s">Nils Berglund - How to Simulate the Wave Equation</a></p>
 
-<p style="text-align:center;">[Numerical Methods for Engineers](https://folk.ntnu.no/leifh/teaching/tkt4140/._main056.html#kap:722)</p>
+<p align=center><a href="https://folk.ntnu.no/leifh/teaching/tkt4140/._main056.html#kap:722">Numerical Methods for Engineers</a></p>
 
-<p style="text-align:center;">[Reflecting Boundaries](https://hplgit.github.io/num-methods-for-PDEs/doc/pub/wave/html/._wave003.html)</p>
+<p align=center><a href="https://hplgit.github.io/num-methods-for-PDEs/doc/pub/wave/html/._wave003.html">Reflecting Boundaries</a></p>
 
-<p style="text-align:center;">[ChatGPT](https://chatgpt.com/)</p>
+<p align=center><a href="https://chatgpt.com/">ChatGPT</a></p>
